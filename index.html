@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO -->
+  <title>Infin Travel — Holiday Packages, Visa Assistance & Flight Bookings | Mangalore</title>
+  <meta name="description" content="Infin Travel, Mangalore — your trusted travel partner for holiday packages, fast visa assistance, best flight deals, hotel bookings, honeymoon & group tours. Get a free consultation today." />
+  <meta name="keywords" content="travel agency Mangalore, visa assistance, flight booking, holiday packages, honeymoon packages, Dubai tour, Thailand tour, Maldives package, Infin Travel" />
+  <meta name="author" content="Infin Travel" />
+  <meta name="theme-color" content="#0C4A6E" />
+  <link rel="canonical" href="https://infintravel.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Infin Travel — Your Journey Begins Here" />
+  <meta property="og:description" content="Hassle-free holiday packages, visa assistance, and flight bookings from Mangalore. Travel made simple, affordable, and memorable." />
+  <meta property="og:locale" content="en_IN" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230C4A6E'/%3E%3Cpath d='M6 20 L26 9 L17 22 L15 16 Z' fill='%23D4AF37'/%3E%3C/svg%3E" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600;6..96,700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Bodoni Moda"', 'serif'],
+            sans: ['Jost', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            navy: { DEFAULT: '#0C4A6E', deep: '#082F49', 700: '#0C4A6E' },
+            sky: { DEFAULT: '#0EA5E9', light: '#38BDF8', soft: '#F0F9FF' },
+            gold: { DEFAULT: '#C9A227', light: '#E6C75A', deep: '#A98318' },
+          },
+          boxShadow: {
+            soft: '0 10px 40px -12px rgba(12,74,110,0.18)',
+            lift: '0 24px 60px -18px rgba(12,74,110,0.32)',
+            gold: '0 10px 30px -8px rgba(201,162,39,0.45)',
+          },
+          keyframes: {
+            float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+            shimmer: { '0%': { backgroundPosition: '200% 0' }, '100%': { backgroundPosition: '-200% 0' } },
+          },
+          animation: {
+            float: 'float 6s ease-in-out infinite',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-padding-top: 96px; }
+    body { font-family: 'Jost', sans-serif; }
+    .font-display { font-family: 'Bodoni Moda', serif; }
+
+    /* Aurora / mesh gradient hero backdrop */
+    .aurora {
+      background:
+        radial-gradient(at 18% 22%, rgba(56,189,248,0.55) 0px, transparent 45%),
+        radial-gradient(at 82% 14%, rgba(201,162,39,0.40) 0px, transparent 42%),
+        radial-gradient(at 70% 80%, rgba(14,165,233,0.45) 0px, transparent 48%),
+        radial-gradient(at 25% 90%, rgba(8,47,73,0.55) 0px, transparent 50%),
+        #082F49;
+    }
+
+    .text-gold-gradient {
+      background: linear-gradient(90deg, #E6C75A, #C9A227, #A98318);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    /* Glassmorphism */
+    .glass {
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+    .glass-light {
+      background: rgba(255,255,255,0.80);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(12,74,110,0.10);
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* Destination image fallback: gradient sits behind <img>; if img fails it stays */
+    .dest-img { transition: transform .6s cubic-bezier(.22,1,.36,1); }
+    .group:hover .dest-img { transform: scale(1.08); }
+
+    .nav-link { position: relative; }
+    .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; height:2px; width:0; background:#C9A227; transition:width .25s ease; }
+    .nav-link:hover::after { width:100%; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .animate-float { animation: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-sky-soft text-navy antialiased selection:bg-gold/30">
+
+  <!-- ============ NAVBAR ============ -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-3">
+      <div id="navbar-inner" class="flex items-center justify-between rounded-2xl px-4 sm:px-6 py-3 transition-all duration-300 glass-light shadow-soft">
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-2.5 group" aria-label="Infin Travel home">
+          <span class="grid place-items-center h-10 w-10 rounded-xl bg-navy text-gold shadow-sm">
+            <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true"><path d="M3.4 14.6 21 7 13.2 20.2l-1.6-5.2-2.2 2.6-.4-.1Z"/></svg>
+          </span>
+          <span class="leading-none">
+            <span class="block font-display text-xl font-semibold tracking-tight text-navy">Infin Travel</span>
+            <span class="block text-[11px] tracking-[0.22em] uppercase text-gold-deep">Mangalore · India</span>
+          </span>
+        </a>
+
+        <!-- Desktop links -->
+        <div class="hidden lg:flex items-center gap-7 text-[15px] font-medium text-navy/80">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#destinations" class="nav-link">Destinations</a>
+          <a href="#why" class="nav-link">Why Us</a>
+          <a href="#testimonials" class="nav-link">Reviews</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+
+        <div class="hidden lg:flex items-center gap-3">
+          <a href="https://wa.me/919999999999?text=Hi%20Infin%20Travel%2C%20I'd%20like%20to%20plan%20a%20trip" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 rounded-xl bg-navy px-4 py-2.5 text-sm font-semibold text-white shadow-soft hover:bg-navy-deep transition-colors cursor-pointer">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.5 14.1c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.3-.9-2.8-1.2-4.5-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.2.7-1.8 1-2 .2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.7.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.6-.1l1.9.9c.3.2.5.2.6.4.1.1.1.8-.1 1.4Z"/></svg>
+            WhatsApp
+          </a>
+          <a href="#contact" class="inline-flex items-center rounded-xl bg-gradient-to-r from-gold-light to-gold px-4 py-2.5 text-sm font-semibold text-navy-deep shadow-gold hover:from-gold hover:to-gold-deep transition-colors cursor-pointer">
+            Free Consultation
+          </a>
+        </div>
+
+        <!-- Mobile toggle -->
+        <button id="menu-btn" class="lg:hidden grid place-items-center h-11 w-11 rounded-xl text-navy hover:bg-navy/5 transition-colors cursor-pointer" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg id="icon-open" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg id="icon-close" viewBox="0 0 24 24" class="hidden h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="lg:hidden hidden mt-2 rounded-2xl glass-light shadow-lift p-3">
+        <div class="flex flex-col">
+          <a href="#about" class="mobile-link rounded-xl px-4 py-3 font-medium text-navy/80 hover:bg-navy/5 transition-colors">About</a>
+          <a href="#services" class="mobile-link rounded-xl px-4 py-3 font-medium text-navy/80 hover:bg-navy/5 transition-colors">Services</a>
+          <a href="#destinations" class="mobile-link rounded-xl px-4 py-3 font-medium text-navy/80 hover:bg-navy/5 transition-colors">Destinations</a>
+          <a href="#why" class="mobile-link rounded-xl px-4 py-3 font-medium text-navy/80 hover:bg-navy/5 transition-colors">Why Us</a>
+          <a href="#testimonials" class="mobile-link rounded-xl px-4 py-3 font-medium text-navy/80 hover:bg-navy/5 transition-colors">Reviews</a>
+          <a href="#contact" class="mobile-link rounded-xl px-4 py-3 font-medium text-navy/80 hover:bg-navy/5 transition-colors">Contact</a>
+          <a href="#contact" class="mobile-link mt-2 text-center rounded-xl bg-gradient-to-r from-gold-light to-gold px-4 py-3 font-semibold text-navy-deep">Free Consultation</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section id="home" class="relative isolate overflow-hidden aurora text-white">
+    <!-- Background photo -->
+    <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1920&q=75"
+         alt="Traveller overlooking a stunning international destination at sunset"
+         class="absolute inset-0 -z-10 h-full w-full object-cover opacity-40"
+         loading="eager" fetchpriority="high"
+         onerror="this.style.display='none'" />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-navy-deep/70 via-navy-deep/40 to-navy-deep/85"></div>
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-36 pb-24 sm:pt-44 sm:pb-32">
+      <div class="max-w-3xl">
+        <span class="reveal inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-sm font-medium text-white/90">
+          <span class="h-2 w-2 rounded-full bg-gold animate-float"></span>
+          Trusted travel partner since day one
+        </span>
+
+        <h1 class="reveal mt-6 font-display text-4xl sm:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight">
+          Your Journey Begins with <span class="text-gold-gradient">Infin Travel</span>
+        </h1>
+
+        <p class="reveal mt-6 max-w-xl text-lg sm:text-xl text-white/85 leading-relaxed">
+          From dream holidays to visa assistance and flight bookings, we make travel
+          <span class="text-white font-medium">simple, affordable, and memorable.</span>
+        </p>
+
+        <div class="reveal mt-9 flex flex-col sm:flex-row gap-4">
+          <a href="#contact" class="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-gold-light to-gold px-7 py-4 text-base font-semibold text-navy-deep shadow-gold hover:from-gold hover:to-gold-deep transition-colors cursor-pointer">
+            Get Free Consultation
+            <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="https://wa.me/919999999999?text=Hi%20Infin%20Travel%2C%20I'd%20like%20to%20plan%20a%20trip" target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-2 rounded-xl glass px-7 py-4 text-base font-semibold text-white hover:bg-white/20 transition-colors cursor-pointer">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.5 14.1c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.3-.9-2.8-1.2-4.5-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.2.7-1.8 1-2 .2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.7.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.6-.1l1.9.9c.3.2.5.2.6.4.1.1.1.8-.1 1.4Z"/></svg>
+            WhatsApp Us
+          </a>
+        </div>
+
+        <!-- Mini trust bar -->
+        <div class="reveal mt-12 grid grid-cols-3 gap-4 max-w-lg">
+          <div><div class="font-display text-2xl sm:text-3xl font-semibold text-gold">1000+</div><div class="text-sm text-white/70">Happy Travelers</div></div>
+          <div><div class="font-display text-2xl sm:text-3xl font-semibold text-gold">25+</div><div class="text-sm text-white/70">Countries</div></div>
+          <div><div class="font-display text-2xl sm:text-3xl font-semibold text-gold">24/7</div><div class="text-sm text-white/70">Support</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- wave divider -->
+    <svg class="block w-full text-sky-soft" viewBox="0 0 1440 90" fill="none" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 90V40c180 40 360 40 540 16C720 32 900 0 1080 4c120 3 240 22 360 36v50H0Z" fill="currentColor"/>
+    </svg>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="reveal relative">
+          <div class="absolute -top-5 -left-5 h-24 w-24 rounded-2xl bg-gold/15 -z-10"></div>
+          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=900&q=80"
+               alt="Scenic road winding through mountains — the journey with Infin Travel"
+               class="w-full rounded-3xl shadow-lift object-cover aspect-[4/3]" loading="lazy"
+               onerror="this.closest('div').classList.add('bg-gradient-to-br','from-sky-light','to-navy'); this.remove();" />
+          <div class="absolute -bottom-6 right-4 sm:right-8 glass-light rounded-2xl shadow-lift px-5 py-4 flex items-center gap-3">
+            <span class="grid place-items-center h-11 w-11 rounded-xl bg-gold/15 text-gold-deep">
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg>
+            </span>
+            <div><div class="font-semibold text-navy leading-none">4.9 / 5</div><div class="text-xs text-navy/60">Rated by travelers</div></div>
+          </div>
+        </div>
+
+        <div>
+          <span class="reveal text-sm font-semibold uppercase tracking-[0.2em] text-gold-deep">Why travel with us?</span>
+          <h2 class="reveal mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-navy leading-tight">
+            Explore the world, without the stress of planning
+          </h2>
+          <p class="reveal mt-5 text-lg text-navy/70 leading-relaxed">
+            At Infin Travel, we help travelers experience the world without the stress of planning.
+            Whether you're looking for a family holiday, honeymoon package, business travel arrangements,
+            visa support, or flight bookings, our experienced team ensures a smooth travel experience
+            from start to finish.
+          </p>
+
+          <ul class="reveal mt-8 grid sm:grid-cols-2 gap-3">
+            <li class="flex items-center gap-3 glass-light rounded-xl px-4 py-3 shadow-soft"><span class="check"></span>Personalized Travel Planning</li>
+            <li class="flex items-center gap-3 glass-light rounded-xl px-4 py-3 shadow-soft"><span class="check"></span>Competitive Pricing</li>
+            <li class="flex items-center gap-3 glass-light rounded-xl px-4 py-3 shadow-soft"><span class="check"></span>Fast Visa Assistance</li>
+            <li class="flex items-center gap-3 glass-light rounded-xl px-4 py-3 shadow-soft"><span class="check"></span>Worldwide Destinations</li>
+            <li class="flex items-center gap-3 glass-light rounded-xl px-4 py-3 shadow-soft sm:col-span-2"><span class="check"></span>Dedicated Customer Support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section id="services" class="py-20 sm:py-28 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <span class="reveal text-sm font-semibold uppercase tracking-[0.2em] text-gold-deep">What we offer</span>
+        <h2 class="reveal mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-navy">Everything for a perfect trip</h2>
+        <p class="reveal mt-4 text-lg text-navy/65">End-to-end travel services, handled by people who care about the details.</p>
+      </div>
+
+      <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- card -->
+        <article class="reveal service-card group relative overflow-hidden rounded-2xl border border-navy/10 bg-sky-soft p-7 shadow-soft hover:shadow-lift hover:-translate-y-1 transition-all duration-300 cursor-default">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7l9-4 9 4-9 4-9-4Z"/><path d="M3 7v7l9 4 9-4V7"/></svg></div>
+          <h3 class="mt-5 font-display text-xl font-semibold text-navy">Tour Packages</h3>
+          <p class="mt-2 text-navy/65 leading-relaxed">Domestic and international holiday packages tailored to your budget and interests.</p>
+        </article>
+
+        <article class="reveal service-card group relative overflow-hidden rounded-2xl border border-navy/10 bg-sky-soft p-7 shadow-soft hover:shadow-lift hover:-translate-y-1 transition-all duration-300 cursor-default">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></div>
+          <h3 class="mt-5 font-display text-xl font-semibold text-navy">Visa Assistance</h3>
+          <p class="mt-2 text-navy/65 leading-relaxed">Professional support for tourist, business, and visit visas — fast and reliable.</p>
+        </article>
+
+        <article class="reveal service-card group relative overflow-hidden rounded-2xl border border-navy/10 bg-sky-soft p-7 shadow-soft hover:shadow-lift hover:-translate-y-1 transition-all duration-300 cursor-default">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 16l20-7-7 13-2.5-5.5L2 16Z"/></svg></div>
+          <h3 class="mt-5 font-display text-xl font-semibold text-navy">Flight Tickets</h3>
+          <p class="mt-2 text-navy/65 leading-relaxed">Best airfare deals for domestic and international travel, booked in minutes.</p>
+        </article>
+
+        <article class="reveal service-card group relative overflow-hidden rounded-2xl border border-navy/10 bg-sky-soft p-7 shadow-soft hover:shadow-lift hover:-translate-y-1 transition-all duration-300 cursor-default">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21V7l9-4 9 4v14"/><path d="M9 21v-6h6v6M3 11h18"/></svg></div>
+          <h3 class="mt-5 font-display text-xl font-semibold text-navy">Hotel Bookings</h3>
+          <p class="mt-2 text-navy/65 leading-relaxed">Comfortable, vetted accommodation options worldwide at the best rates.</p>
+        </article>
+
+        <article class="reveal service-card group relative overflow-hidden rounded-2xl border border-navy/10 bg-sky-soft p-7 shadow-soft hover:shadow-lift hover:-translate-y-1 transition-all duration-300 cursor-default">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10Z"/><path d="M9.5 10.5l1.8 1.8 3.2-3.3"/></svg></div>
+          <h3 class="mt-5 font-display text-xl font-semibold text-navy">Honeymoon Packages</h3>
+          <p class="mt-2 text-navy/65 leading-relaxed">Romantic destinations and fully customized experiences for two.</p>
+        </article>
+
+        <article class="reveal service-card group relative overflow-hidden rounded-2xl border border-navy/10 bg-sky-soft p-7 shadow-soft hover:shadow-lift hover:-translate-y-1 transition-all duration-300 cursor-default">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15.5 20c0-2.4 1.3-4 3.5-4 1.6 0 2.6.8 3 2"/></svg></div>
+          <h3 class="mt-5 font-display text-xl font-semibold text-navy">Group Tours</h3>
+          <p class="mt-2 text-navy/65 leading-relaxed">Corporate trips, family tours, and seamless group travel arrangements.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DESTINATIONS ============ -->
+  <section id="destinations" class="py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <span class="reveal text-sm font-semibold uppercase tracking-[0.2em] text-gold-deep">Popular destinations</span>
+        <h2 class="reveal mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-navy">Where will you go next?</h2>
+        <p class="reveal mt-4 text-lg text-navy/65">Handpicked getaways loved by our travelers — tap any to enquire instantly.</p>
+      </div>
+
+      <div id="dest-grid" class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- ============ WHY CHOOSE / STATS ============ -->
+  <section id="why" class="relative py-20 sm:py-28 aurora text-white overflow-hidden">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <span class="reveal text-sm font-semibold uppercase tracking-[0.2em] text-gold-light">Why choose Infin Travel</span>
+        <h2 class="reveal mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold">Numbers that build trust</h2>
+      </div>
+
+      <div class="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="reveal glass rounded-2xl p-7 text-center"><div class="font-display text-4xl sm:text-5xl font-semibold text-gold-light" data-count="1000" data-suffix="+">0</div><div class="mt-2 text-white/80">Happy Travelers</div></div>
+        <div class="reveal glass rounded-2xl p-7 text-center"><div class="font-display text-4xl sm:text-5xl font-semibold text-gold-light" data-count="100" data-suffix="+">0</div><div class="mt-2 text-white/80">Tour Packages</div></div>
+        <div class="reveal glass rounded-2xl p-7 text-center"><div class="font-display text-4xl sm:text-5xl font-semibold text-gold-light" data-count="25" data-suffix="+">0</div><div class="mt-2 text-white/80">Countries Covered</div></div>
+        <div class="reveal glass rounded-2xl p-7 text-center"><div class="font-display text-4xl sm:text-5xl font-semibold text-gold-light">24/7</div><div class="mt-2 text-white/80">Travel Support</div></div>
+      </div>
+
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="reveal flex items-center gap-3 glass rounded-xl px-4 py-3"><span class="check check-gold"></span>Expert Travel Guidance</div>
+        <div class="reveal flex items-center gap-3 glass rounded-xl px-4 py-3"><span class="check check-gold"></span>End-to-End Support</div>
+        <div class="reveal flex items-center gap-3 glass rounded-xl px-4 py-3"><span class="check check-gold"></span>Transparent Pricing</div>
+        <div class="reveal flex items-center gap-3 glass rounded-xl px-4 py-3"><span class="check check-gold"></span>Trusted Travel Partners</div>
+        <div class="reveal flex items-center gap-3 glass rounded-xl px-4 py-3 sm:col-span-2 lg:col-span-1"><span class="check check-gold"></span>Customized Itineraries</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section id="testimonials" class="py-20 sm:py-28 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <span class="reveal text-sm font-semibold uppercase tracking-[0.2em] text-gold-deep">Loved by travelers</span>
+        <h2 class="reveal mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-navy">What our customers say</h2>
+      </div>
+
+      <div class="mt-14 grid md:grid-cols-3 gap-6">
+        <!-- t1 -->
+        <figure class="reveal flex flex-col rounded-2xl border border-navy/10 bg-sky-soft p-7 shadow-soft">
+          <div class="flex gap-1 text-gold" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg>
+          </div>
+          <blockquote class="mt-4 flex-1 text-navy/75 leading-relaxed">"My UAE visa was processed incredibly fast and without any confusion. The team kept me updated at every step. Truly stress-free!"</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <img src="https://i.pravatar.cc/120?img=12" alt="Portrait of Rohan Shetty" class="h-12 w-12 rounded-full object-cover ring-2 ring-gold/40" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22%3E%3Crect width=%2248%22 height=%2248%22 rx=%2224%22 fill=%22%230C4A6E%22/%3E%3Ctext x=%2224%22 y=%2230%22 font-size=%2218%22 fill=%22%23D4AF37%22 text-anchor=%22middle%22 font-family=%22sans-serif%22%3ERS%3C/text%3E%3C/svg%3E'" />
+            <div><div class="font-semibold text-navy leading-none">Rohan Shetty</div><div class="text-sm text-navy/55">Visa · Dubai</div></div>
+          </figcaption>
+        </figure>
+
+        <!-- t2 -->
+        <figure class="reveal flex flex-col rounded-2xl border border-navy/10 bg-sky-soft p-7 shadow-soft">
+          <div class="flex gap-1 text-gold" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg>
+          </div>
+          <blockquote class="mt-4 flex-1 text-navy/75 leading-relaxed">"Our Maldives honeymoon was beyond perfect — the resort, transfers and itinerary were flawless. Infin planned every little detail."</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <img src="https://i.pravatar.cc/120?img=45" alt="Portrait of Ananya Rao" class="h-12 w-12 rounded-full object-cover ring-2 ring-gold/40" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22%3E%3Crect width=%2248%22 height=%2248%22 rx=%2224%22 fill=%22%230C4A6E%22/%3E%3Ctext x=%2224%22 y=%2230%22 font-size=%2218%22 fill=%22%23D4AF37%22 text-anchor=%22middle%22 font-family=%22sans-serif%22%3EAR%3C/text%3E%3C/svg%3E'" />
+            <div><div class="font-semibold text-navy leading-none">Ananya Rao</div><div class="text-sm text-navy/55">Honeymoon · Maldives</div></div>
+          </figcaption>
+        </figure>
+
+        <!-- t3 -->
+        <figure class="reveal flex flex-col rounded-2xl border border-navy/10 bg-sky-soft p-7 shadow-soft">
+          <div class="flex gap-1 text-gold" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2 15 9l7 .5-5.4 4.6L18.3 21 12 17.2 5.7 21l1.7-6.9L2 9.5 9 9z"/></svg>
+          </div>
+          <blockquote class="mt-4 flex-1 text-navy/75 leading-relaxed">"Booked a family group tour to Singapore & Malaysia. Excellent customer service — they were reachable 24/7 and sorted everything quickly."</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <img src="https://i.pravatar.cc/120?img=33" alt="Portrait of Imran Khan" class="h-12 w-12 rounded-full object-cover ring-2 ring-gold/40" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22%3E%3Crect width=%2248%22 height=%2248%22 rx=%2224%22 fill=%22%230C4A6E%22/%3E%3Ctext x=%2224%22 y=%2230%22 font-size=%2218%22 fill=%22%23D4AF37%22 text-anchor=%22middle%22 font-family=%22sans-serif%22%3EIK%3C/text%3E%3C/svg%3E'" />
+            <div><div class="font-semibold text-navy leading-none">Imran Khan</div><div class="text-sm text-navy/55">Group Tour · Singapore</div></div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-stretch">
+        <!-- Info + Map -->
+        <div class="reveal">
+          <span class="text-sm font-semibold uppercase tracking-[0.2em] text-gold-deep">Get in touch</span>
+          <h2 class="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-navy leading-tight">Let's Plan Your Next Adventure</h2>
+          <p class="mt-4 text-lg text-navy/70 max-w-md">Tell us your dream destination and we'll craft a custom plan. A travel expert will reach out within 24 hours.</p>
+
+          <div class="mt-8 space-y-4">
+            <div class="flex items-start gap-4">
+              <span class="grid place-items-center h-11 w-11 rounded-xl bg-navy text-gold shrink-0"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10Z"/><circle cx="12" cy="11" r="2.5"/></svg></span>
+              <div><div class="font-semibold text-navy">Infin Travel</div><div class="text-navy/65">Mangalore, Karnataka, India</div></div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="grid place-items-center h-11 w-11 rounded-xl bg-navy text-gold shrink-0"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.5 14.1c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.3-.9-2.8-1.2-4.5-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.2.7-1.8 1-2 .2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.7.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.6-.1l1.9.9c.3.2.5.2.6.4.1.1.1.8-.1 1.4Z"/></svg></span>
+              <div><div class="font-semibold text-navy">WhatsApp &amp; Call</div><a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="text-navy/65 hover:text-sky transition-colors">+91 99999 99999</a></div>
+            </div>
+          </div>
+
+          <!-- Google Map -->
+          <div class="mt-8 overflow-hidden rounded-2xl shadow-soft border border-navy/10">
+            <iframe
+              title="Infin Travel office location in Mangalore, Karnataka"
+              src="https://www.google.com/maps?q=Mangalore,Karnataka,India&output=embed"
+              class="w-full h-64" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="reveal glass-light rounded-3xl shadow-lift p-7 sm:p-9">
+          <form id="lead-form" novalidate class="space-y-5">
+            <div>
+              <label for="name" class="block text-sm font-medium text-navy mb-1.5">Name</label>
+              <input id="name" name="name" type="text" required autocomplete="name" placeholder="Your full name"
+                     class="w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-navy placeholder-navy/40 focus:border-sky focus:ring-2 focus:ring-sky/30 outline-none transition" />
+            </div>
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label for="phone" class="block text-sm font-medium text-navy mb-1.5">Phone Number</label>
+                <input id="phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="+91 ..."
+                       class="w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-navy placeholder-navy/40 focus:border-sky focus:ring-2 focus:ring-sky/30 outline-none transition" />
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-navy mb-1.5">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="you@email.com"
+                       class="w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-navy placeholder-navy/40 focus:border-sky focus:ring-2 focus:ring-sky/30 outline-none transition" />
+              </div>
+            </div>
+            <div>
+              <label for="destination" class="block text-sm font-medium text-navy mb-1.5">Destination Interested In</label>
+              <select id="destination" name="destination" class="w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-navy focus:border-sky focus:ring-2 focus:ring-sky/30 outline-none transition cursor-pointer">
+                <option value="">Select a destination</option>
+                <option>Dubai</option><option>Thailand</option><option>Maldives</option><option>Singapore</option>
+                <option>Malaysia</option><option>Europe</option><option>Bali</option><option>Turkey</option>
+                <option>Other / Not sure yet</option>
+              </select>
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium text-navy mb-1.5">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="Tell us about your trip, dates, travellers..."
+                        class="w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-navy placeholder-navy/40 focus:border-sky focus:ring-2 focus:ring-sky/30 outline-none transition resize-none"></textarea>
+            </div>
+            <button type="submit"
+                    class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-gold-light to-gold px-6 py-4 text-base font-semibold text-navy-deep shadow-gold hover:from-gold hover:to-gold-deep transition-colors cursor-pointer">
+              Request a Free Travel Consultation
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <p id="form-note" class="text-center text-sm text-navy/55">We'll send your enquiry straight to our team on WhatsApp.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-navy-deep text-white/80">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="grid place-items-center h-10 w-10 rounded-xl bg-white/5 text-gold"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor"><path d="M3.4 14.6 21 7 13.2 20.2l-1.6-5.2-2.2 2.6-.4-.1Z"/></svg></span>
+            <span class="font-display text-xl font-semibold text-white">Infin Travel</span>
+          </div>
+          <p class="mt-4 text-sm leading-relaxed text-white/60">Your trusted travel partner in Mangalore — making travel simple, affordable, and memorable.</p>
+          <!-- Socials -->
+          <div class="mt-5 flex gap-3">
+            <a href="#" aria-label="Facebook" class="grid place-items-center h-9 w-9 rounded-lg bg-white/5 hover:bg-gold hover:text-navy-deep transition-colors cursor-pointer"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M13 22v-9h3l.5-3.5H13V7.3c0-1 .3-1.7 1.8-1.7H17V2.5c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.6H7V13h3v9h3Z"/></svg></a>
+            <a href="#" aria-label="Instagram" class="grid place-items-center h-9 w-9 rounded-lg bg-white/5 hover:bg-gold hover:text-navy-deep transition-colors cursor-pointer"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4a3.8 3.8 0 0 1-1.4-.9 3.8 3.8 0 0 1-.9-1.4c-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.7.1-.9 0-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.8-.3 1.7-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 .9.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.8.3 1.7.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c.9 0 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1 .1-.3.3-.8.3-1.7.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-.9-.2-1.4-.3-1.7a2.7 2.7 0 0 0-.7-1 2.7 2.7 0 0 0-1-.7c-.3-.1-.8-.3-1.7-.3-1.2-.1-1.6-.1-4.7-.1Zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 8a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Zm6.2-8.2a1.1 1.1 0 1 1-2.3 0 1.1 1.1 0 0 1 2.3 0Z"/></svg></a>
+            <a href="https://wa.me/919999999999" target="_blank" rel="noopener" aria-label="WhatsApp" class="grid place-items-center h-9 w-9 rounded-lg bg-white/5 hover:bg-gold hover:text-navy-deep transition-colors cursor-pointer"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.5 14.1c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.3-.9-2.8-1.2-4.5-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.2.7-1.8 1-2 .2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.7.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.6-.1l1.9.9c.3.2.5.2.6.4.1.1.1.8-.1 1.4Z"/></svg></a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-white">Quick Links</h3>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            <li><a href="#about" class="hover:text-gold transition-colors">About Us</a></li>
+            <li><a href="#destinations" class="hover:text-gold transition-colors">Destinations</a></li>
+            <li><a href="#why" class="hover:text-gold transition-colors">Why Choose Us</a></li>
+            <li><a href="#testimonials" class="hover:text-gold transition-colors">Reviews</a></li>
+            <li><a href="#contact" class="hover:text-gold transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-white">Services</h3>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            <li><a href="#services" class="hover:text-gold transition-colors">Tour Packages</a></li>
+            <li><a href="#services" class="hover:text-gold transition-colors">Visa Assistance</a></li>
+            <li><a href="#services" class="hover:text-gold transition-colors">Flight Tickets</a></li>
+            <li><a href="#services" class="hover:text-gold transition-colors">Hotel Bookings</a></li>
+            <li><a href="#services" class="hover:text-gold transition-colors">Honeymoon &amp; Group Tours</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-white">Contact</h3>
+          <ul class="mt-4 space-y-2.5 text-sm text-white/60">
+            <li>Infin Travel</li>
+            <li>Mangalore, Karnataka, India</li>
+            <li><a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="hover:text-gold transition-colors">+91 99999 99999</a></li>
+            <li><a href="mailto:hello@infintravel.com" class="hover:text-gold transition-colors">hello@infintravel.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-white/10 text-center text-sm text-white/50">
+        © 2026 Infin Travel. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ WHATSAPP FLOAT ============ -->
+  <a href="https://wa.me/919999999999?text=Hi%20Infin%20Travel%2C%20I'd%20like%20to%20plan%20a%20trip"
+     target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"
+     class="fixed bottom-5 right-5 z-50 grid place-items-center h-14 w-14 rounded-full bg-[#25D366] text-white shadow-lift hover:scale-105 transition-transform cursor-pointer animate-float">
+    <span class="absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-60 animate-ping"></span>
+    <svg viewBox="0 0 24 24" class="relative h-7 w-7" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.5 14.1c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.3-.9-2.8-1.2-4.5-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.2.7-1.8 1-2 .2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.7.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.6-.1l1.9.9c.3.2.5.2.6.4.1.1.1.8-.1 1.4Z"/></svg>
+  </a>
+
+  <!-- Check icon component styles -->
+  <style>
+    .check { position:relative; display:inline-grid; place-items:center; height:1.4rem; width:1.4rem; border-radius:9999px; background:rgba(14,165,233,0.15); flex:none; }
+    .check::after { content:''; width:.45rem; height:.8rem; border:solid #0EA5E9; border-width:0 2px 2px 0; transform:rotate(45deg) translateY(-1px); }
+    .check-gold { background:rgba(201,162,39,0.22); }
+    .check-gold::after { border-color:#E6C75A; }
+    .icon-badge { display:grid; place-items:center; height:3.25rem; width:3.25rem; border-radius:1rem; color:#0C4A6E; background:linear-gradient(135deg, rgba(56,189,248,0.25), rgba(201,162,39,0.25)); }
+    .service-card:hover .icon-badge { color:#A98318; }
+  </style>
+
+  <!-- ============ JSON-LD ============ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "name": "Infin Travel",
+    "description": "Travel agency in Mangalore offering holiday packages, visa assistance, flight bookings, hotel bookings, honeymoon and group tours.",
+    "address": { "@type": "PostalAddress", "addressLocality": "Mangalore", "addressRegion": "Karnataka", "addressCountry": "IN" },
+    "areaServed": ["Dubai","Thailand","Maldives","Singapore","Malaysia","Europe","Bali","Turkey"],
+    "telephone": "+91-99999-99999",
+    "priceRange": "₹₹"
+  }
+  </script>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    // ---- Destinations data (rendered with image + gradient fallback) ----
+    const destinations = [
+      { name:'Dubai',     desc:'Skyscrapers, desert safaris & luxury shopping.', img:'photo-1512453979798-5ea266f8880c', g:'from-amber-400 to-orange-600' },
+      { name:'Thailand',  desc:'Tropical beaches, temples & vibrant street life.', img:'photo-1528181304800-259b08848526', g:'from-emerald-400 to-teal-600' },
+      { name:'Maldives',  desc:'Overwater villas & crystal-clear turquoise lagoons.', img:'photo-1514282401047-d79a71a590e8', g:'from-cyan-400 to-blue-600' },
+      { name:'Singapore', desc:'Futuristic gardens, iconic skyline & food heaven.', img:'photo-1525625293386-3f8f99389edd', g:'from-rose-400 to-indigo-600' },
+      { name:'Malaysia',  desc:'Twin towers, rainforests & island getaways.', img:'photo-1596422846543-75c6fc197f07', g:'from-sky-400 to-blue-700' },
+      { name:'Europe',    desc:'Timeless cities, art, culture & romance.', img:'photo-1502602898657-3e91760cbb34', g:'from-indigo-400 to-purple-700' },
+      { name:'Bali',      desc:'Rice terraces, surf beaches & serene retreats.', img:'photo-1537953773345-d172ccf13cf1', g:'from-lime-400 to-emerald-700' },
+      { name:'Turkey',    desc:'Cappadocia balloons & Istanbul\'s rich heritage.', img:'photo-1541432901042-2d8bd64b4a9b', g:'from-orange-400 to-rose-600' },
+    ];
+
+    const grid = document.getElementById('dest-grid');
+    grid.innerHTML = destinations.map(d => `
+      <article class="reveal group relative overflow-hidden rounded-2xl shadow-soft hover:shadow-lift transition-shadow duration-300 bg-gradient-to-br ${d.g} aspect-[3/4]">
+        <img src="https://images.unsplash.com/${d.img}?auto=format&fit=crop&w=600&q=75"
+             alt="${d.name} travel destination" loading="lazy"
+             class="dest-img absolute inset-0 h-full w-full object-cover"
+             onerror="this.remove()" />
+        <div class="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-navy-deep/20 to-transparent"></div>
+        <div class="absolute inset-x-0 bottom-0 p-5">
+          <h3 class="font-display text-2xl font-semibold text-white drop-shadow">${d.name}</h3>
+          <p class="mt-1 text-sm text-white/80 leading-snug">${d.desc}</p>
+          <a href="https://wa.me/919999999999?text=Hi%20Infin%20Travel%2C%20I'm%20interested%20in%20a%20${encodeURIComponent(d.name)}%20package"
+             target="_blank" rel="noopener"
+             class="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-white/95 px-4 py-2 text-sm font-semibold text-navy-deep opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 focus:opacity-100 focus:translate-y-0 transition-all duration-300 hover:bg-gold cursor-pointer">
+            Enquire Now
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+    `).join('');
+
+    // ---- Scroll reveal (staggered) ----
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const siblings = Array.from(el.parentElement.querySelectorAll('.reveal'));
+          el.style.transitionDelay = Math.min(siblings.indexOf(el), 6) * 70 + 'ms';
+          el.classList.add('in');
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // ---- Animated stat counters ----
+    const counters = document.querySelectorAll('[data-count]');
+    const cObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target; const target = +el.dataset.count; const suffix = el.dataset.suffix || '';
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) { el.textContent = target + suffix; cObs.unobserve(el); return; }
+        let cur = 0; const step = Math.max(1, Math.floor(target / 60));
+        const tick = () => { cur += step; if (cur >= target) { el.textContent = target + suffix; } else { el.textContent = cur + suffix; requestAnimationFrame(tick); } };
+        tick(); cObs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => cObs.observe(c));
+
+    // ---- Navbar shrink on scroll ----
+    const inner = document.getElementById('navbar-inner');
+    const onScroll = () => {
+      if (window.scrollY > 20) { inner.classList.add('py-2','shadow-lift'); inner.classList.remove('py-3'); }
+      else { inner.classList.add('py-3'); inner.classList.remove('py-2','shadow-lift'); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+    // ---- Mobile menu ----
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose = document.getElementById('icon-close');
+    const toggleMenu = (open) => {
+      menu.classList.toggle('hidden', !open);
+      iconOpen.classList.toggle('hidden', open);
+      iconClose.classList.toggle('hidden', !open);
+      btn.setAttribute('aria-expanded', String(open));
+    };
+    btn.addEventListener('click', () => toggleMenu(menu.classList.contains('hidden')));
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => toggleMenu(false)));
+
+    // ---- Lead form -> WhatsApp handoff ----
+    const form = document.getElementById('lead-form');
+    const note = document.getElementById('form-note');
+    form.addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      const f = ev.target;
+      if (!f.name.value.trim() || !f.phone.value.trim()) {
+        note.textContent = 'Please enter your name and phone number.';
+        note.className = 'text-center text-sm text-red-600 font-medium';
+        return;
+      }
+      const msg =
+        `*New Travel Enquiry — Infin Travel*%0A%0A` +
+        `*Name:* ${encodeURIComponent(f.name.value)}%0A` +
+        `*Phone:* ${encodeURIComponent(f.phone.value)}%0A` +
+        `*Email:* ${encodeURIComponent(f.email.value || '-')}%0A` +
+        `*Destination:* ${encodeURIComponent(f.destination.value || '-')}%0A` +
+        `*Message:* ${encodeURIComponent(f.message.value || '-')}`;
+      note.textContent = 'Opening WhatsApp with your enquiry...';
+      note.className = 'text-center text-sm text-green-700 font-medium';
+      window.open(`https://wa.me/919999999999?text=${msg}`, '_blank');
+      f.reset();
+    });
+
+    // ---- Update footer year (safety) ----
+  </script>
+</body>
+</html>
