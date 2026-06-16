@@ -9,8 +9,11 @@ Capture content in seconds, push it through a learning pipeline
 5‑step progress checklist per item, and watch your streaks, badges and analytics
 grow.
 
-Built with **React + Vite + Tailwind CSS + Recharts**, persisted entirely in
-**LocalStorage** — no backend, no sign‑up, your data stays on your device.
+Built with **React + Vite + Tailwind CSS + Recharts**. Data is stored
+**permanently in the cloud** via **Supabase** (Postgres + auth), private to your
+account and synced across every device. If Supabase isn't configured it
+gracefully falls back to **LocalStorage** so the app still runs offline / for
+quick demos.
 
 ---
 
@@ -45,27 +48,75 @@ Built with **React + Vite + Tailwind CSS + Recharts**, persisted entirely in
 
 ---
 
-## 🚀 Setup
+## 🚀 Quick start (local)
 
 > Requires **Node.js 18+**.
 
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Start the dev server (http://localhost:5173)
-npm run dev
-
-# 3. Build for production
-npm run build
-
-# 4. Preview the production build
-npm run preview
+npm run dev      # http://localhost:5173
 ```
 
-On first launch the app seeds itself with sample data so every screen looks
-alive. Add your first real item and your data is saved to LocalStorage
-automatically. Use **Export** any time to back up to CSV.
+Without a `.env` the app runs in **LocalStorage demo mode** (no login, sample
+data). To enable permanent cloud storage + login, set up Supabase below.
+
+Other scripts: `npm run build` (production build), `npm run preview` (serve the
+build at http://localhost:4173).
+
+---
+
+## ☁️ Permanent storage with Supabase (free)
+
+### 1. Create the project & database
+1. Sign up at [supabase.com](https://supabase.com) and create a new project
+   (pick a strong DB password, any region).
+2. In the dashboard open **SQL Editor → New query**, paste the contents of
+   [`supabase/schema.sql`](./supabase/schema.sql), and click **Run**. This
+   creates the `items` table and Row Level Security so each user only ever sees
+   their own data.
+3. (Optional) Go to **Authentication → Providers → Email** and turn *off*
+   "Confirm email" if you want to log in immediately without email verification.
+
+### 2. Connect the app
+1. In Supabase open **Project Settings → API** and copy the **Project URL** and
+   the **anon public** key.
+2. In the project folder, copy the example env file and paste your values:
+   ```bash
+   cp .env.example .env
+   ```
+   ```
+   VITE_SUPABASE_URL=https://YOUR-PROJECT-ref.supabase.co
+   VITE_SUPABASE_ANON_KEY=your-anon-public-key
+   ```
+3. Restart the dev server (`npm run dev`). You'll now see a **login / sign-up**
+   screen. Create an account — your data is saved to Supabase and synced to any
+   device you log in from.
+
+> The anon key is meant to be public in front-end apps; your data is protected
+> by Row Level Security, not by hiding the key. Never expose the `service_role`
+> key.
+
+---
+
+## 🌐 Deploy to Vercel
+
+1. Push this repo to GitHub (already done if you're reading this on GitHub).
+2. Go to [vercel.com](https://vercel.com) → **Add New → Project** → import the
+   repo.
+3. **Important — set the Root Directory** to `reel-learning-vault` (the app lives
+   in a subfolder). Vercel auto-detects Vite (build: `npm run build`, output:
+   `dist`).
+4. Under **Environment Variables**, add the same two values from your `.env`:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+5. Click **Deploy**. You'll get a public `https://…vercel.app` URL. Every push to
+   the branch redeploys automatically.
+
+That's it — open the URL on your laptop or phone, sign in, and your vault is the
+same everywhere.
+
+> Tip: keep your data backed up with the **Export** button (Library page); CSV
+> **Import** restores or migrates it.
 
 ---
 
@@ -90,9 +141,17 @@ later means changing **one file** (`src/lib/storage.js`).
 
 ```
 ThemeProvider ─ dark/light mode
-VaultProvider ─ items + all mutations (useReducer), auto‑persisted
+AuthProvider  ─ Supabase session (sign in / up / out), current user
+VaultProvider ─ items + all mutations (useReducer); syncs to Supabase per user,
+                or LocalStorage when unconfigured
 UIProvider    ─ active page, navigation params, global modal stack
 ```
+
+**Cloud sync strategy:** the reducer keeps unchanged items at the same object
+reference, so a cheap reference‑diff on every change tells the sync layer exactly
+which rows to `upsert` / `delete` in Supabase — no manual save button, no full
+re‑writes. Each item is one row (`id`, `user_id`, `data` jsonb), and Row Level
+Security guarantees users only ever touch their own rows.
 
 - **Pure analytics layer** (`src/lib/analytics.js`) turns the item array into
   stats, streaks and chart series — easy to memoise and unit‑test.
@@ -116,7 +175,9 @@ reel-learning-vault/
     ├── index.css                # Tailwind + base styles
     ├── lib/
     │   ├── constants.js         # platforms, categories, statuses, priorities
-    │   ├── storage.js           # LocalStorage adapter (swap for cloud later)
+    │   ├── supabaseClient.js    # Supabase client (from env vars)
+    │   ├── repo.js              # cloud CRUD (list / upsert / delete)
+    │   ├── storage.js           # LocalStorage fallback adapter
     │   ├── model.js             # item factory + progress helpers
     │   ├── workflow.js          # status pipeline rules
     │   ├── analytics.js         # stats, streaks, chart series
@@ -126,7 +187,8 @@ reel-learning-vault/
     │   └── sampleData.js        # first‑run seed data
     ├── context/
     │   ├── ThemeContext.jsx
-    │   ├── VaultContext.jsx     # reducer + actions
+    │   ├── AuthContext.jsx      # Supabase auth/session
+    │   ├── VaultContext.jsx     # reducer + actions + cloud/local sync
     │   └── UIContext.jsx        # navigation + modals
     ├── hooks/
     │   └── useFilteredItems.js  # search / filter / sort
@@ -135,8 +197,12 @@ reel-learning-vault/
     │   ├── layout/              # Sidebar, Topbar, nav config
     │   └── dashboard/           # StatCard
     ├── features/items/          # ItemCard, ItemForm, modals, checklist, BulkBar
-    └── pages/                   # Dashboard, Queue, Library, Categories,
+    └── pages/                   # AuthPage, Dashboard, Queue, Library, Categories,
                                  # Calendar, Analytics, Achievements
+
+supabase/
+└── schema.sql                   # run once in the Supabase SQL editor
+.env.example                     # copy to .env with your Supabase keys
 ```
 
 ---
@@ -153,7 +219,8 @@ The architecture was designed so these can be layered on without a rewrite:
   the same schema.
 - **Mobile app** — the pure `lib/` logic is platform‑agnostic and portable to
   React Native.
-- **Cloud sync** — replace the body of `storage.js` with async API calls.
+- **Cloud sync** — ✅ implemented via Supabase (`repo.js`); LocalStorage remains
+  as an automatic offline fallback.
 
 ---
 

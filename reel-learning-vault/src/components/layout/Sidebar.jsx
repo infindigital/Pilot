@@ -1,7 +1,8 @@
-import { GraduationCap, Plus, X } from 'lucide-react';
+import { GraduationCap, Plus, X, LogOut } from 'lucide-react';
 import { NAV_ITEMS } from './nav.js';
 import { useUI } from '../../context/UIContext.jsx';
 import { useVault } from '../../context/VaultContext.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 import { getStreak } from '../../lib/analytics.js';
 import { cn } from '../../lib/cn.js';
 import Button from '../ui/Button.jsx';
@@ -9,6 +10,7 @@ import Button from '../ui/Button.jsx';
 export default function Sidebar({ mobileOpen, onCloseMobile }) {
   const { page, navigate, openEditor } = useUI();
   const { items } = useVault();
+  const { authEnabled, user, signOut } = useAuth();
   const streak = getStreak(items);
 
   const go = (id) => {
@@ -94,6 +96,25 @@ export default function Sidebar({ mobileOpen, onCloseMobile }) {
             {streak > 0 ? 'Keep the momentum going!' : 'Learn something today to start a streak.'}
           </p>
         </div>
+
+        {authEnabled && user && (
+          <div className="mt-3 flex items-center gap-2 rounded-xl border border-slate-200 p-2.5 dark:border-slate-800">
+            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-brand-100 text-sm font-bold uppercase text-brand-700 dark:bg-brand-900/50 dark:text-brand-200">
+              {(user.email || '?').charAt(0)}
+            </div>
+            <p className="min-w-0 flex-1 truncate text-xs font-medium text-slate-600 dark:text-slate-300" title={user.email}>
+              {user.email}
+            </p>
+            <button
+              type="button"
+              onClick={signOut}
+              aria-label="Sign out"
+              className="rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-rose-600 dark:hover:bg-slate-800"
+            >
+              <LogOut className="h-4 w-4" />
+            </button>
+          </div>
+        )}
       </aside>
     </>
   );

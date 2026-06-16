@@ -5,12 +5,14 @@ import {
   useMemo,
   useReducer,
   useRef,
-  useCallback,
+  useState,
 } from 'react';
 import { storage } from '../lib/storage.js';
+import { repo } from '../lib/repo.js';
 import { createItem, normalizeItem } from '../lib/model.js';
 import { getSampleItems } from '../lib/sampleData.js';
 import { COMPLETED_ON_STATUS } from '../lib/workflow.js';
+import { useAuth } from './AuthContext.jsx';
 
 const VaultContext = createContext(null);
 
@@ -98,24 +100,79 @@ function mergeItems(existing, incoming, mode = 'merge') {
 // ----- provider -----
 
 export function VaultProvider({ children }) {
+  const { authEnabled, user } = useAuth();
   const [state, dispatch] = useReducer(reducer, { items: [] });
-  const hydrated = useRef(false);
+  const [loading, setLoading] = useState(true);
 
-  // Load once on mount; seed with sample data on first ever run.
+  // When auth is enabled and a user is signed in, the cloud (Supabase) is the
+  // source of truth. Otherwise we use LocalStorage (demo / no-config mode).
+  const useCloud = authEnabled && Boolean(user);
+  const userId = user?.id ?? null;
+
+  // Snapshot of the last-synced items (by reference) so we can diff cheaply.
+  const prevItems = useRef(new Map());
+  // Skip the first sync pass right after hydration (nothing changed yet).
+  const skipNextSync = useRef(true);
+
+  // ---- Load when the data source changes (login / logout / mode) ----
   useEffect(() => {
-    const saved = storage.load();
-    if (saved && Array.isArray(saved.items)) {
-      dispatch({ type: 'HYDRATE', items: saved.items.map(normalizeItem) });
-    } else {
-      dispatch({ type: 'HYDRATE', items: getSampleItems() });
+    let active = true;
+    setLoading(true);
+    skipNextSync.current = true;
+
+    (async () => {
+      let items = [];
+      try {
+        if (useCloud) {
+          items = await repo.list();
+        } else if (authEnabled) {
+          // Auth enabled but signed out — show nothing.
+          items = [];
+        } else {
+          const saved = storage.load();
+          items = saved && Array.isArray(saved.items)
+            ? saved.items.map(normalizeItem)
+            : getSampleItems();
+        }
+      } catch (err) {
+        console.error('Failed to load vault', err);
+      }
+      if (!active) return;
+      dispatch({ type: 'HYDRATE', items });
+      prevItems.current = new Map(items.map((i) => [i.id, i]));
+      setLoading(false);
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [useCloud, userId, authEnabled]);
+
+  // ---- Persist on change ----
+  // The reducer keeps unchanged items at the same reference, so a reference diff
+  // tells us exactly which rows to upsert / delete in the cloud.
+  useEffect(() => {
+    if (loading) return;
+    if (skipNextSync.current) {
+      skipNextSync.current = false;
+      prevItems.current = new Map(state.items.map((i) => [i.id, i]));
+      return;
     }
-    hydrated.current = true;
-  }, []);
 
-  // Persist on every change after the initial hydration.
-  useEffect(() => {
-    if (hydrated.current) storage.save({ items: state.items, version: 1 });
-  }, [state.items]);
+    const curMap = new Map(state.items.map((i) => [i.id, i]));
+
+    if (useCloud) {
+      const prev = prevItems.current;
+      const toUpsert = state.items.filter((i) => prev.get(i.id) !== i);
+      const removed = [...prev.keys()].filter((id) => !curMap.has(id));
+      if (toUpsert.length) repo.upsertMany(toUpsert, userId).catch((e) => console.error('upsert failed', e));
+      if (removed.length) repo.removeMany(removed).catch((e) => console.error('delete failed', e));
+    } else if (!authEnabled) {
+      storage.save({ items: state.items, version: 1 });
+    }
+
+    prevItems.current = curMap;
+  }, [state.items, loading, useCloud, authEnabled, userId]);
 
   const actions = useMemo(
     () => ({
@@ -136,7 +193,10 @@ export function VaultProvider({ children }) {
     [],
   );
 
-  const value = useMemo(() => ({ items: state.items, ...actions }), [state.items, actions]);
+  const value = useMemo(
+    () => ({ items: state.items, loading, isCloud: useCloud, ...actions }),
+    [state.items, loading, useCloud, actions],
+  );
 
   return <VaultContext.Provider value={value}>{children}</VaultContext.Provider>;
 }
@@ -145,10 +205,4 @@ export const useVault = () => {
   const ctx = useContext(VaultContext);
   if (!ctx) throw new Error('useVault must be used within VaultProvider');
   return ctx;
-};
-
-// Convenience selector hook for a single item.
-export const useItem = (id) => {
-  const { items } = useVault();
-  return useCallback(() => items.find((i) => i.id === id), [items, id])();
 };
