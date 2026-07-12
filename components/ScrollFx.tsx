@@ -106,9 +106,12 @@ export default function ScrollFx() {
         );
       });
 
-      // Scroll-scrubbed videos: playback time is driven by scroll progress.
-      // data-scrub-video="pin"  → pins its section; scrolling plays the video
-      // data-scrub-video       → scrubs across the section's viewport transit
+      // Scroll-driven videos: the video PLAYS while the user scrolls and
+      // pauses the moment they stop. Playing forward works with any video
+      // encoding (unlike currentTime seeking, which stalls on the sparse
+      // keyframes of AI-generated clips).
+      // data-scrub-video="pin" → also pins its section for ~2 viewports
+      // data-scrub-video       → active while the section transits the viewport
       root
         .querySelectorAll<HTMLVideoElement>("video[data-scrub-video]")
         .forEach((v) => {
@@ -117,43 +120,47 @@ export default function ScrollFx() {
           v.pause();
           const mode = v.dataset.scrubVideo;
           const section = v.closest("section") || v.parentElement!;
-          const state = { target: 0, raf: 0 };
+          const state = { lastScroll: 0 };
 
-          // Lerp currentTime toward the scroll target for buttery seeks.
-          const tick = () => {
-            if (v.duration) {
-              const diff = state.target - v.currentTime;
-              if (Math.abs(diff) > 0.01) {
-                v.currentTime = v.currentTime + diff * 0.22;
-              }
-            }
-            state.raf = requestAnimationFrame(tick);
+          const onUpdate = (self: ScrollTrigger) => {
+            state.lastScroll = performance.now();
+            // Faster scrolling → faster playback (clamped to feel cinematic).
+            const rate = Math.min(
+              2.5,
+              Math.max(0.75, Math.abs(self.getVelocity()) / 900)
+            );
+            if (Math.abs(v.playbackRate - rate) > 0.15) v.playbackRate = rate;
           };
-          state.raf = requestAnimationFrame(tick);
+
+          const tick = () => {
+            const scrolling = performance.now() - state.lastScroll < 180;
+            const ended = v.duration && v.currentTime >= v.duration - 0.08;
+            if (scrolling && v.paused && !ended) {
+              v.play().catch(() => {});
+            } else if ((!scrolling || ended) && !v.paused) {
+              v.pause();
+            }
+            requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
 
           ScrollTrigger.create(
             mode === "pin"
               ? {
                   trigger: section,
                   start: "top top",
-                  end: "+=220%",
+                  end: "+=200%",
                   pin: true,
                   scrub: true,
                   anticipatePin: 1,
-                  onUpdate: (self) => {
-                    if (v.duration)
-                      state.target = self.progress * (v.duration - 0.05);
-                  },
+                  onUpdate,
                 }
               : {
                   trigger: section,
                   start: "top bottom",
                   end: "bottom top",
                   scrub: true,
-                  onUpdate: (self) => {
-                    if (v.duration)
-                      state.target = self.progress * (v.duration - 0.05);
-                  },
+                  onUpdate,
                 }
           );
         });
