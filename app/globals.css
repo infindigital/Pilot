@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ember: #ff6a1a;
+  --gold: #c9a227;
+  --parchment: #e8dcc0;
+  --obsidian: #07070a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--obsidian);
+}
+
+body {
+  margin: 0;
+  background: var(--obsidian);
+  color: var(--parchment);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  cursor: none; /* replaced by custom torch cursor on capable devices */
+}
+
+/* Hide custom cursor fallback on touch */
+@media (hover: none), (pointer: coarse) {
+  body { cursor: auto; }
+}
+
+::selection {
+  background: rgba(255, 106, 26, 0.3);
+  color: #fff;
+}
+
+/* ── Display headings ───────────────────────────────── */
+.font-display {
+  font-family: var(--font-cinzel), "Trajan Pro", serif;
+}
+
+/* Forged-gold gradient text used on key headlines */
+.text-forged {
+  background: linear-gradient(
+    92deg,
+    #8a6d1f 0%,
+    #e9c877 25%,
+    #fff2cf 50%,
+    #c9a227 75%,
+    #8a6d1f 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-ember-glow {
+  color: #ffb066;
+  text-shadow: 0 0 24px rgba(255, 106, 26, 0.55), 0 0 4px rgba(255, 106, 26, 0.8);
+}
+
+/* ── Film grain + vignette overlays (global, fixed) ─── */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.vignette-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 55;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* ── Textures ───────────────────────────────────────── */
+.tex-parchment {
+  background-color: #d8c9a3;
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      rgba(120, 90, 40, 0.18),
+      transparent 40%
+    ),
+    radial-gradient(circle at 80% 70%, rgba(90, 60, 20, 0.2), transparent 45%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.35'/%3E%3C/svg%3E");
+  color: #2a1d0a;
+}
+
+.tex-steel {
+  background:
+    linear-gradient(145deg, #17181d 0%, #1f2127 40%, #0f1013 100%);
+  border: 1px solid rgba(201, 162, 39, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 20px 50px -20px rgba(0, 0, 0, 0.9);
+}
+
+.tex-steel:hover {
+  border-color: rgba(255, 106, 26, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 40px -6px rgba(255, 106, 26, 0.25),
+    0 24px 60px -20px rgba(0, 0, 0, 0.95);
+}
+
+/* Hairline divider forged from steel */
+.rule-forged {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 162, 39, 0.5),
+    rgba(255, 106, 26, 0.5),
+    rgba(201, 162, 39, 0.5),
+    transparent
+  );
+}
+
+/* ── Custom torch cursor ────────────────────────────── */
+.torch-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(255, 176, 102, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease, background 0.25s ease,
+    border-color 0.25s ease;
+  mix-blend-mode: screen;
+}
+.torch-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 40;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 106, 26, 0.12) 0%,
+    rgba(255, 106, 26, 0.05) 30%,
+    transparent 65%
+  );
+  transition: opacity 0.4s ease;
+}
+.torch-cursor.is-hover {
+  width: 54px;
+  height: 54px;
+  background: rgba(255, 106, 26, 0.12);
+  border-color: rgba(255, 176, 102, 1);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .torch-cursor,
+  .torch-glow { display: none; }
+}
+
+/* ── Reveal-on-scroll base (GSAP toggles .is-in) ─────── */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-up.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced motion: show everything, kill transforms */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal-up { opacity: 1; transform: none; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0a0a0d; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#3a2a12, #1a1b20);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover { background: #4a3418; }

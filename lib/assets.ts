@@ -27,26 +27,26 @@ function asset(file: string, cdnUrl: string): string {
 }
 
 export const ASSETS = {
-  // ── Hero: Saleeth on the Iron Throne (approved Option A) ──
+  // ── Hero: Saleeth working on a laptop atop the Iron Throne (approved Hero B) ──
   heroImage: asset(
     "hero-throne.png",
-    `${CDN}/hf_20260712_105301_65a0543b-aba1-4d3a-9c68-fb875b487bc6.png`
+    `${CDN}/hf_20260712_105909_d520b7d3-5fd5-4cf5-a81a-a128f9d7f482.png`
   ),
-  // 4K upscaled hero still (used as poster / fallback).
+  // 4K upscaled hero still (poster / fallback).
   heroImage4k: asset(
     "hero-throne-4k.png",
-    `${CDN}/hf_20260712_105517_369a7777-eadb-4447-b2b5-1d5e0388f841.png`
+    `${CDN}/hf_20260712_132457_caa8af55-ae0f-4955-9b8a-4df3663360f5.png`
   ),
-  // Living loop (breathing + embers + camera drift).
+  // Living loop (working on laptop + breathing + embers + camera push-in).
   heroVideo: asset(
     "hero-throne-loop.mp4",
-    `${CDN}/hf_20260712_105625_e0286d78-d09b-452a-b870-cc1a0b85a3e7.mp4`
+    `${CDN}/hf_20260712_132458_14c98129-c49f-499f-a90a-1d519d5a03c4.mp4`
   ),
 
-  // ── About: war / strategy table ──
+  // ── About: war / strategy table with labeled marketing map (approved Table B) ──
   warTable: asset(
     "war-table.png",
-    `${CDN}/hf_20260712_105440_83445210-cd20-4b25-81ae-df04028f5da3.png`
+    `${CDN}/hf_20260712_105914_c13c22de-182e-4c44-a23a-63d90d4309a0.png`
   ),
 
   // ── Section transition: great-hall walk ──
