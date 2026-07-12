@@ -120,25 +120,31 @@ export default function ScrollFx() {
           v.pause();
           const mode = v.dataset.scrubVideo;
           const section = v.closest("section") || v.parentElement!;
-          const state = { lastScroll: 0 };
+          // "Chase the target": scroll progress maps to a film position and
+          // the video PLAYS toward it at a rate proportional to the gap.
+          // Decoder-friendly (no per-frame seeking) yet deterministic —
+          // stop scrolling and playback glides to a stop at your position.
+          const state = { progress: 0 };
 
           const onUpdate = (self: ScrollTrigger) => {
-            state.lastScroll = performance.now();
-            // Faster scrolling → faster playback (clamped to feel cinematic).
-            const rate = Math.min(
-              2.5,
-              Math.max(0.75, Math.abs(self.getVelocity()) / 900)
-            );
-            if (Math.abs(v.playbackRate - rate) > 0.15) v.playbackRate = rate;
+            state.progress = self.progress;
           };
 
           const tick = () => {
-            const scrolling = performance.now() - state.lastScroll < 180;
-            const ended = v.duration && v.currentTime >= v.duration - 0.08;
-            if (scrolling && v.paused && !ended) {
-              v.play().catch(() => {});
-            } else if ((!scrolling || ended) && !v.paused) {
-              v.pause();
+            if (v.duration) {
+              const target = state.progress * (v.duration - 0.05);
+              const gap = target - v.currentTime;
+              if (gap > 0.04) {
+                // Chase forward by playing; scale speed to the gap.
+                v.playbackRate = Math.min(3, Math.max(0.5, gap * 2.2));
+                if (v.paused) v.play().catch(() => {});
+              } else if (gap < -0.4) {
+                // Scrolled back up — one coarse seek, then hold.
+                if (!v.paused) v.pause();
+                v.currentTime = Math.max(0, target);
+              } else if (!v.paused) {
+                v.pause();
+              }
             }
             requestAnimationFrame(tick);
           };
