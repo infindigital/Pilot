@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import VideoScene from "@/components/VideoScene";
 import { ASSETS } from "@/lib/assets";
 import { ABOUT } from "@/lib/content";
 
@@ -14,12 +14,10 @@ export default function About() {
             className="relative aspect-[16/10] overflow-hidden rounded-sm tex-steel"
             data-scene
           >
-            <Image
-              src={ASSETS.warTable}
+            <VideoScene
+              video={ASSETS.warTableVideo}
+              poster={ASSETS.warTable}
               alt="Saleeth at the war table planning SEO, performance marketing and social media campaigns"
-              fill
-              className="object-cover"
-              data-parallax="0.08"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 to-transparent" />
           </div>

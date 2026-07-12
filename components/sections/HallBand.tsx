@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import VideoScene from "@/components/VideoScene";
 import EmberField from "@/components/EmberField";
 import { ASSETS } from "@/lib/assets";
 import { BRAND } from "@/lib/content";
@@ -13,12 +13,11 @@ export default function HallBand() {
   return (
     <section className="relative h-[60vh] overflow-hidden" aria-label="Cinematic interlude">
       <div className="absolute inset-0" data-scene>
-        <Image
-          src={ASSETS.hallWalk}
+        <VideoScene
+          video={ASSETS.hallWalkVideo}
+          poster={ASSETS.hallWalk}
           alt="Saleeth walking through a torch-lit great hall"
-          fill
-          className="object-cover"
-          data-parallax="0.15"
+          parallax={0.15}
         />
         <div className="absolute inset-0 bg-obsidian/45" />
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian via-transparent to-obsidian" />

@@ -21,9 +21,10 @@ export default function Process() {
         </div>
 
         <div className="relative mt-20">
-          {/* Marching route */}
+          {/* Marching route — draws itself as the campaign advances (scroll) */}
           <span
-            className="absolute left-6 top-0 h-full w-px bg-gradient-to-b from-transparent via-ember/50 to-transparent md:left-1/2"
+            data-draw
+            className="absolute left-6 top-0 h-full w-px bg-gradient-to-b from-ember/20 via-ember/70 to-gold/40 shadow-[0_0_12px_rgba(255,106,26,0.5)] md:left-1/2"
             aria-hidden
           />
 

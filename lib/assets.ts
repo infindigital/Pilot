@@ -48,11 +48,21 @@ export const ASSETS = {
     "war-table.png",
     `${CDN}/hf_20260712_105914_c13c22de-182e-4c44-a23a-63d90d4309a0.png`
   ),
+  // Living loop (candle flicker, pulsing map glow, drifting mist).
+  warTableVideo: asset(
+    "war-table-loop.mp4",
+    `${CDN}/hf_20260712_140030_fc543f77-1442-468a-b522-1e79d6b8c39f.mp4`
+  ),
 
   // ── Section transition: great-hall walk ──
   hallWalk: asset(
     "great-hall-walk.png",
     `${CDN}/hf_20260712_105445_95dfac23-a517-4433-98d4-91db4e3369a9.png`
+  ),
+  // Living loop (walking toward camera, swaying banners, brazier flames).
+  hallWalkVideo: asset(
+    "great-hall-walk-loop.mp4",
+    `${CDN}/hf_20260712_140019_c9e4a903-9147-4a87-8824-0bc5c206579f.mp4`
   ),
 
   // ── Brand: the Sufy sigil crest (wordmark variant — swap id once chosen) ──

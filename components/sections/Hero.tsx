@@ -1,19 +1,52 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import Image from "next/image";
 import EmberField from "@/components/EmberField";
 import { ASSETS } from "@/lib/assets";
 import { BRAND } from "@/lib/content";
 
 export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+
+  // Mouse-driven 3D camera drift — the title floats in depth above the scene.
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const sx = useSpring(mx, { stiffness: 60, damping: 20 });
+  const sy = useSpring(my, { stiffness: 60, damping: 20 });
+  const rotateY = useTransform(sx, [-0.5, 0.5], [-4, 4]);
+  const rotateX = useTransform(sy, [-0.5, 0.5], [3, -3]);
+  const bgX = useTransform(sx, [-0.5, 0.5], [8, -8]);
+  const bgY = useTransform(sy, [-0.5, 0.5], [5, -5]);
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    const r = ref.current?.getBoundingClientRect();
+    if (!r) return;
+    mx.set((e.clientX - r.left) / r.width - 0.5);
+    my.set((e.clientY - r.top) / r.height - 0.5);
+  };
+
   return (
     <section
       id="hero"
+      ref={ref}
+      onMouseMove={onMouseMove}
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden"
+      style={{ perspective: "1200px" }}
     >
-      {/* Cinematic backplate: living video loop with 4K/1K still fallback */}
-      <div className="absolute inset-0" data-scene>
+      {/* Cinematic backplate: living video loop with 4K/1K still fallback.
+          #hero-media is scroll-scrubbed by ScrollFx (zoom + dim on exit). */}
+      <motion.div
+        id="hero-media"
+        className="absolute inset-0"
+        style={{ x: bgX, y: bgY, scale: 1.04 }}
+      >
         {ASSETS.heroVideo ? (
           <video
             className="h-full w-full object-cover"
@@ -36,12 +69,16 @@ export default function Hero() {
         {/* Grading + legibility gradients */}
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/40 via-transparent to-obsidian" />
         <div className="absolute inset-0 bg-gradient-to-r from-obsidian/70 via-transparent to-obsidian/60" />
-      </div>
+      </motion.div>
 
       <EmberField className="z-10" density={1.1} />
 
-      {/* Title block */}
-      <div className="relative z-20 mx-auto max-w-4xl px-6 text-center">
+      {/* Title block — floats in 3D above the scene, scroll-scrubbed on exit */}
+      <motion.div
+        id="hero-title"
+        className="relative z-20 mx-auto max-w-4xl px-6 text-center"
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      >
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -56,6 +93,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
           transition={{ delay: 1.9, duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
           className="mt-4 font-display text-7xl font-black leading-none tracking-widest2 text-forged sm:text-8xl md:text-[10rem]"
+          style={{ transform: "translateZ(60px)" }}
         >
           {BRAND.name}
         </motion.h1>
@@ -96,7 +134,7 @@ export default function Hero() {
             Summon the Strategist
           </a>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll cue */}
       <motion.div
