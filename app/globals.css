@@ -14,7 +14,10 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* NOTE: no `scroll-behavior: smooth` here — it conflicts with GSAP
+     ScrollTrigger pinning (cancels anchor scrolls mid-flight and makes
+     scrub feel rubbery). Anchor navigation is animated by ScrollFx via
+     gsap ScrollToPlugin instead. */
   background: var(--obsidian);
 }
 

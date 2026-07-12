@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 /**
  * Central GSAP/ScrollTrigger controller. Wires:
@@ -32,8 +33,28 @@ export default function ScrollFx() {
       return () => mo.disconnect();
     }
 
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
     const bound = new WeakSet<Element>();
+
+    // Animated anchor navigation — plays nicely with pinned sections
+    // (native smooth anchor scrolling gets cancelled by pin updates).
+    const onAnchorClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement).closest?.(
+        'a[href^="#"]'
+      ) as HTMLAnchorElement | null;
+      if (!a) return;
+      const target = document.querySelector(a.getAttribute("href")!);
+      if (!target) return;
+      e.preventDefault();
+      history.pushState(null, "", a.getAttribute("href")!);
+      gsap.to(window, {
+        scrollTo: { y: target as Element, autoKill: false },
+        duration: 1.2,
+        ease: "power3.inOut",
+        overwrite: "auto",
+      });
+    };
+    document.addEventListener("click", onAnchorClick);
 
     const bind = (root: ParentNode) => {
       root.querySelectorAll<HTMLElement>(".reveal-up").forEach((el) => {
@@ -134,15 +155,17 @@ export default function ScrollFx() {
             if (v.duration) {
               const target = state.progress * (v.duration - 0.05);
               const gap = target - v.currentTime;
-              if (gap > 0.04) {
+              if (gap > 0.12) {
                 // Chase forward by playing; scale speed to the gap.
-                v.playbackRate = Math.min(3, Math.max(0.5, gap * 2.2));
+                // Wide hysteresis (start >0.12s, stop <0.04s) prevents
+                // rapid play/pause thrash that reads as stutter.
+                v.playbackRate = Math.min(2.5, Math.max(0.6, gap * 1.8));
                 if (v.paused) v.play().catch(() => {});
               } else if (gap < -0.4) {
                 // Scrolled back up — one coarse seek, then hold.
                 if (!v.paused) v.pause();
                 v.currentTime = Math.max(0, target);
-              } else if (!v.paused) {
+              } else if (gap < 0.04 && !v.paused) {
                 v.pause();
               }
             }
@@ -185,6 +208,7 @@ export default function ScrollFx() {
 
     const t = setTimeout(() => ScrollTrigger.refresh(), 500);
     return () => {
+      document.removeEventListener("click", onAnchorClick);
       mo.disconnect();
       clearTimeout(t);
       clearTimeout(refreshT);
