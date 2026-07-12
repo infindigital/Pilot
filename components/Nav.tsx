@@ -32,12 +32,12 @@ export default function Nav() {
           {BRAND.name}
         </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-7 md:flex lg:gap-9">
           {NAV.map((n) => (
             <li key={n.id}>
               <a
                 href={`#${n.id}`}
-                className="group relative font-body text-xs uppercase tracking-widest2 text-parchment/70 transition hover:text-goldLight"
+                className="group relative whitespace-nowrap font-body text-[11px] uppercase tracking-widest2 text-parchment/70 transition hover:text-goldLight"
               >
                 {n.label}
                 <span className="absolute -bottom-1 left-0 h-px w-0 bg-ember transition-all duration-300 group-hover:w-full" />
@@ -48,7 +48,7 @@ export default function Nav() {
 
         <a
           href="#contact"
-          className="hidden rounded-sm border border-gold/40 px-5 py-2 font-body text-xs uppercase tracking-widest2 text-goldLight transition hover:border-ember hover:text-ember-glow md:inline-block"
+          className="hidden whitespace-nowrap rounded-sm border border-gold/40 px-5 py-2 font-body text-[11px] uppercase tracking-widest2 text-goldLight transition hover:border-ember hover:text-ember-glow md:inline-block"
         >
           Send a Raven
         </a>

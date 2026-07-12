@@ -41,12 +41,14 @@ export default function Hero() {
       style={{ perspective: "1200px" }}
     >
       {/* Cinematic backplate: living video loop with 4K/1K still fallback.
-          #hero-media is scroll-scrubbed by ScrollFx (zoom + dim on exit). */}
-      <motion.div
-        id="hero-media"
-        className="absolute inset-0"
-        style={{ x: bgX, y: bgY, scale: 1.04 }}
-      >
+          Outer #hero-media is scroll-scrubbed by GSAP (zoom + dim on exit);
+          inner motion.div carries the mouse drift — separate layers so
+          Framer and GSAP never write to the same element's transform. */}
+      <div id="hero-media" className="absolute inset-0">
+        <motion.div
+          className="absolute inset-0"
+          style={{ x: bgX, y: bgY, scale: 1.06 }}
+        >
         {ASSETS.heroVideo ? (
           <video
             className="h-full w-full object-cover"
@@ -69,14 +71,15 @@ export default function Hero() {
         {/* Grading + legibility gradients */}
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/40 via-transparent to-obsidian" />
         <div className="absolute inset-0 bg-gradient-to-r from-obsidian/70 via-transparent to-obsidian/60" />
-      </motion.div>
+        </motion.div>
+      </div>
 
       <EmberField className="z-10" density={1.1} />
 
-      {/* Title block — floats in 3D above the scene, scroll-scrubbed on exit */}
+      {/* Title block — outer #hero-title is GSAP's (scroll drift + fade);
+          inner motion.div floats in 3D with the mouse. */}
+      <div id="hero-title" className="relative z-20 mx-auto max-w-4xl px-6 text-center">
       <motion.div
-        id="hero-title"
-        className="relative z-20 mx-auto max-w-4xl px-6 text-center"
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       >
         <motion.p
@@ -135,6 +138,7 @@ export default function Hero() {
           </a>
         </motion.div>
       </motion.div>
+      </div>
 
       {/* Scroll cue */}
       <motion.div

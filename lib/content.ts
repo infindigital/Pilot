@@ -14,13 +14,12 @@ export const BRAND = {
 };
 
 export const NAV = [
-  { id: "hero", label: "The Throne" },
-  { id: "about", label: "The Strategist" },
-  { id: "services", label: "The Arsenal" },
+  { id: "hero", label: "Throne" },
+  { id: "about", label: "Strategist" },
+  { id: "services", label: "Arsenal" },
   { id: "results", label: "Conquests" },
-  { id: "process", label: "The Campaign" },
+  { id: "process", label: "Campaign" },
   { id: "testimonials", label: "Allies" },
-  { id: "contact", label: "Send a Raven" },
 ];
 
 export const ABOUT = {

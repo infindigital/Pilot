@@ -92,9 +92,6 @@ export default function Results() {
           ))}
         </div>
 
-        <p className="reveal-up mt-8 text-center font-body text-[10px] uppercase tracking-widest2 text-ash">
-          {RESULTS.note}
-        </p>
       </div>
     </section>
   );
