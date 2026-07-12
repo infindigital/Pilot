@@ -17,7 +17,7 @@ export default function HallBand() {
           video={ASSETS.hallWalkVideo}
           poster={ASSETS.hallWalk}
           alt="Saleeth walking through a torch-lit great hall"
-          parallax={0.15}
+          scrub
         />
         <div className="absolute inset-0 bg-obsidian/45" />
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian via-transparent to-obsidian" />

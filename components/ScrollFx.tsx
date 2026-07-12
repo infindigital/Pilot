@@ -106,37 +106,57 @@ export default function ScrollFx() {
         );
       });
 
-      // Hero scroll-out cinematography — bound once when hero exists.
-      const heroMedia = root.querySelector<HTMLElement>("#hero-media");
-      const heroTitle = root.querySelector<HTMLElement>("#hero-title");
-      if (heroMedia && !bound.has(heroMedia)) {
-        bound.add(heroMedia);
-        gsap.to(heroMedia, {
-          scale: 1.18,
-          opacity: 0.25,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
+      // Scroll-scrubbed videos: playback time is driven by scroll progress.
+      // data-scrub-video="pin"  → pins its section; scrolling plays the video
+      // data-scrub-video       → scrubs across the section's viewport transit
+      root
+        .querySelectorAll<HTMLVideoElement>("video[data-scrub-video]")
+        .forEach((v) => {
+          if (bound.has(v)) return;
+          bound.add(v);
+          v.pause();
+          const mode = v.dataset.scrubVideo;
+          const section = v.closest("section") || v.parentElement!;
+          const state = { target: 0, raf: 0 };
+
+          // Lerp currentTime toward the scroll target for buttery seeks.
+          const tick = () => {
+            if (v.duration) {
+              const diff = state.target - v.currentTime;
+              if (Math.abs(diff) > 0.01) {
+                v.currentTime = v.currentTime + diff * 0.22;
+              }
+            }
+            state.raf = requestAnimationFrame(tick);
+          };
+          state.raf = requestAnimationFrame(tick);
+
+          ScrollTrigger.create(
+            mode === "pin"
+              ? {
+                  trigger: section,
+                  start: "top top",
+                  end: "+=220%",
+                  pin: true,
+                  scrub: true,
+                  anticipatePin: 1,
+                  onUpdate: (self) => {
+                    if (v.duration)
+                      state.target = self.progress * (v.duration - 0.05);
+                  },
+                }
+              : {
+                  trigger: section,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true,
+                  onUpdate: (self) => {
+                    if (v.duration)
+                      state.target = self.progress * (v.duration - 0.05);
+                  },
+                }
+          );
         });
-      }
-      if (heroTitle && !bound.has(heroTitle)) {
-        bound.add(heroTitle);
-        gsap.to(heroTitle, {
-          yPercent: -45,
-          opacity: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#hero",
-            start: "top top",
-            end: "70% top",
-            scrub: true,
-          },
-        });
-      }
     };
 
     bind(document.body);

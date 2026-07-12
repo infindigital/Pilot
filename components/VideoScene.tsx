@@ -5,9 +5,13 @@ import Image from "next/image";
 
 /**
  * Cinematic video plate with still-image fallback.
- * - Lazy: video element only starts loading/playing when scrolled near view
- *   (IntersectionObserver), pauses when off-screen — keeps 60fps and data lean.
- * - Falls back to the poster still when no video URL is provided yet.
+ *
+ * Modes:
+ *  - ambient (default): lazy autoplay loop — playback starts when scrolled
+ *    near view and pauses off-screen.
+ *  - scrub: playback time is driven by scroll (bound via ScrollFx's
+ *    [data-scrub-video] hook) — the scene "moves as you scroll", with no
+ *    loop restarts.
  */
 export default function VideoScene({
   video,
@@ -15,16 +19,19 @@ export default function VideoScene({
   alt,
   className = "",
   parallax,
+  scrub = false,
 }: {
   video?: string;
   poster: string;
   alt: string;
   className?: string;
   parallax?: number;
+  scrub?: boolean;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    if (scrub) return; // ScrollFx owns playback in scrub mode
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
@@ -36,7 +43,7 @@ export default function VideoScene({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [video]);
+  }, [video, scrub]);
 
   const parallaxProps = parallax ? { "data-parallax": String(parallax) } : {};
 
@@ -59,10 +66,11 @@ export default function VideoScene({
       src={video}
       poster={poster}
       muted
-      loop
       playsInline
-      preload="none"
       aria-label={alt}
+      {...(scrub
+        ? { "data-scrub-video": "", preload: "auto" }
+        : { loop: true, preload: "none" })}
       {...parallaxProps}
     />
   );
