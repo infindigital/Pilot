@@ -1,0 +1,3 @@
+query,clicks,impressions,ctr,avg_position,intent,opportunity
+# Export from Google Search Console > Performance > Queries (last 28 days) and paste rows below.
+# opportunity = high when impressions are high but position 5-15 (striking distance) or CTR below target.

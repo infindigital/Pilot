@@ -1,0 +1,8 @@
+keyword,intent,search_volume,keyword_difficulty,current_position,target_position,mapped_url,priority,notes
+{{PRODUCT_CATEGORY}},commercial,,,,,https://{{DOMAIN}}/,high,head term
+best {{PRODUCT_CATEGORY}},commercial,,,,,https://{{DOMAIN}}/,high,"best tool" query
+{{PRODUCT_CATEGORY}} for small business,commercial,,,,,,medium,segment
+{{PRODUCT_CATEGORY}} pricing,transactional,,,,,https://{{DOMAIN}}/pricing,high,bottom-funnel
+{{PRODUCT_CATEGORY}} alternatives,commercial,,,,,,medium,competitor capture
+how to choose {{PRODUCT_CATEGORY}},informational,,,,,,medium,top-funnel
+{{CLIENT_NAME}} reviews,navigational,,,,,,low,brand + reputation

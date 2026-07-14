@@ -1,0 +1,7 @@
+prompt_or_keyword,channel,winner,we_rank_or_cited,competitor_1,competitor_2,gap_note
+best {{PRODUCT_CATEGORY}},AI (ChatGPT),,,,,
+best {{PRODUCT_CATEGORY}},Google,,,,,
+{{PRODUCT_CATEGORY}} alternatives,AI (Perplexity),,,,,
+top {{PRODUCT_CATEGORY}} 2026,AI (Gemini),,,,,
+{{PRODUCT_CATEGORY}} for [segment],Google,,,,,
+# channel = which surface (Google / ChatGPT / Perplexity / Gemini). winner = who owns the answer today.

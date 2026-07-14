@@ -1,0 +1,9 @@
+prompt,funnel_stage,engine_to_test,we_appear,competitor_appears,notes
+what is the best {{PRODUCT_CATEGORY}},consideration,ChatGPT,,,
+{{PRODUCT_CATEGORY}} for small teams,consideration,Perplexity,,,
+{{CLIENT_NAME}} vs [competitor],decision,Gemini,,,
+is {{CLIENT_NAME}} worth it,decision,ChatGPT,,,
+top {{PRODUCT_CATEGORY}} tools 2026,consideration,Perplexity,,,
+how much does {{PRODUCT_CATEGORY}} cost,consideration,AI Overviews,,,
+alternatives to [competitor],consideration,ChatGPT,,,
+# Add the real prompts your buyers type into AI. Test each, mark whether {{CLIENT_NAME}} is mentioned.
